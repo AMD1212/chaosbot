@@ -1,0 +1,67 @@
+Event: 1
+Event: 2
+Event: 3
+Event: 4
+Event: 5
+Event: 251
+	RPL_LUSERCLIENT
+                        ":There are <integer> users and <integer> \
+                         invisible on <integer> servers"
+Event: 252
+	RPL_LUSEROP
+                        "<integer> :operator(s) online"
+Event: 253
+	RPL_LUSERUNKNOWN
+                        "<integer> :unknown connection(s)"
+Event: 254
+	RPL_LUSERCHANNELS
+                        "<integer> :channels formed"
+Event: 255
+	RPL_LUSERME
+                        ":I have <integer> clients and <integer> \
+                          servers"
+
+                        - In processing an LUSERS message, the server
+                          sends a set of replies from RPL_LUSERCLIENT,
+                          RPL_LUSEROP, RPL_USERUNKNOWN,
+                          RPL_LUSERCHANNELS and RPL_LUSERME.  When
+                          replying, a server must send back
+                          RPL_LUSERCLIENT and RPL_LUSERME.  The other
+                          replies are only sent back if a non-zero count
+                          is found for them.
+Event: 265
+Event: 266
+Event: 250
+Event: 375
+	RPL_MOTDSTART
+                        ":- <server> Message of the day - "
+Event: 372
+	RPL_MOTD
+                        ":- <text>"
+Event: 376
+	RPL_ENDOFMOTD
+                        ":End of /MOTD command"
+
+                - When responding to the MOTD message and the MOTD file
+                  is found, the file is displayed line by line, with
+                  each line no longer than 80 characters, using
+                  RPL_MOTD format replies.  These should be surrounded
+                  by a RPL_MOTDSTART (before the RPL_MOTDs) and an
+                  RPL_ENDOFMOTD (after).
+
+
+After successful join:
+########################
+Event: 332
+	RPL_TOPIC
+              "<channel> :<topic>"
+Event: 333
+Event: 353
+	RPL_NAMREPLY
+              "( "=" / "*" / "@" ) <channel>
+               :[ "@" / "+" ] <nick> *( " " [ "@" / "+" ] <nick> )
+         - "@" is used for secret channels, "*" for private
+           channels, and "=" for others (public channels).
+Event: 366
+	RPL_ENDOFNAMES
+              "<channel> :End of NAMES list"

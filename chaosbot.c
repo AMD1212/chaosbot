@@ -8,6 +8,8 @@ static int chaosbot_connect(void);
 static void event_connect(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
 static void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count);
 static void event_join(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
+static void event_privmsg(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
+
 
 int main(void) 
 {
@@ -28,6 +30,7 @@ static int chaosbot_connect() {
 
 	// Set up the rest of events
 	callbacks.event_join = event_join;
+	callbacks.event_privmsg = event_privmsg;
 
 	// Now create the session
 	irc_session_t * session = irc_create_session( &callbacks );
@@ -50,10 +53,7 @@ static int chaosbot_connect() {
 		printf("Running\n");
 	}
 
-	if (irc_cmd_join( session, "#chaossbg", 0) ) {
-	  // most likely connection error
-		printf("Joining\n");
-	}
+
 	return 256;
 }
 
@@ -62,8 +62,18 @@ static void event_connect(irc_session_t * session, const char * event, const cha
 }
 
 static void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count) {
-	printf("Numeric: At the moment i do nothing - Event: %u Origin:  %s Count: %u\n", event, origin, count);
+	printf("Numeric: At the moment i do nothing - Event: %u Origin: %s Count: %u\n", event, origin, count);
+	if (event == 376) {
+			if (irc_cmd_join( session, "#chaossbg", 0) ) {
+	 			 // most likely connection error
+				printf("Error joining channel\n");
+			}
+	}
 }
 static void event_join(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
-	printf("Event join called\n");
+	printf("Join: We have joined a channel, lets see what this does");
+}
+
+static void event_privmsg(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
+	printf("PrivMessage: looks like you got the following - Event: %s Origin: %s Count: %u\n", event, origin, count);
 }
