@@ -8,12 +8,15 @@ static int chaosbot_connect(void);
 static void event_connect(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
 static void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count);
 static void event_join(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
+static void event_channel(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
 static void event_privmsg(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
 
 
 int main(void) 
 {
+	//TODO chaosbot_getConfig();
 	chaosbot_connect();
+	//TODO choasbot_loadPlugins();
 	return 0;
 }
 
@@ -30,6 +33,7 @@ static int chaosbot_connect() {
 
 	// Set up the rest of events
 	callbacks.event_join = event_join;
+	callbacks.event_channel = event_channel;
 	callbacks.event_privmsg = event_privmsg;
 
 	// Now create the session
@@ -57,23 +61,31 @@ static int chaosbot_connect() {
 	return 256;
 }
 
+
+// Events
 static void event_connect(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
-	printf("Connect: At the moment i do nothing\n");
+	printf("Chaosbot_connect: Event: %s Origin: %s Count: %u\n", event, origin, count);
 }
 
 static void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count) {
 	printf("Numeric: At the moment i do nothing - Event: %u Origin: %s Count: %u\n", event, origin, count);
 	if (event == 376) {
-			if (irc_cmd_join( session, "#chaossbg", 0) ) {
+			if (irc_cmd_join( session, "#metaldrachenarmee", 0) ) {
 	 			 // most likely connection error
 				printf("Error joining channel\n");
 			}
 	}
 }
 static void event_join(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
-	printf("Join: We have joined a channel, lets see what this does");
+	printf("Join: We have joined a channel, lets see what this does\n");
 }
 
 static void event_privmsg(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
-	printf("PrivMessage: looks like you got the following - Event: %s Origin: %s Count: %u\n", event, origin, count);
+	//printf("PrivMessage: Event: %s Origin: %s Count: %u\n", event, origin, count);
+	printf("PrivMessage: User %s sent a message: %s\n", origin, params[1]);
+}
+
+static void event_channel(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
+	//printf("ChannelMessage: Event: %s Origin: %s Count: %u\n", event, origin, count);
+	printf("ChannelMessage: User %s sent a message: %s\n", origin, params[1]);
 }
