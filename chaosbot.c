@@ -59,7 +59,6 @@ static void event_privmsg(irc_session_t * session, const char * event, const cha
 
 int main(int argc, char **argv) {
   struct arguments arguments;
-  char server[100];
 
   /* default values */
   arguments.output_file = "-";
@@ -77,7 +76,7 @@ int main(int argc, char **argv) {
 static void chaosbot_getConfig(char *config_file_name) {
   /* getting config */
   config_t cfg;
-  const char *server;
+  const char *server, *port, *channel, *name, *rl_name;
 
   //char *config_file_name = "chaosbot.conf";
  
@@ -86,16 +85,41 @@ static void chaosbot_getConfig(char *config_file_name) {
 
   /* read file, if error exit */
   if (!config_read_file(&cfg, config_file_name)) {
-    printf("\n%s:%d - %s", config_error_file(&cfg), config_error_line(&cfg), config_error_text(&cfg));
+    printf("%s:%d - %s\n", config_error_file(&cfg), config_error_line(&cfg), config_error_text(&cfg));
     config_destroy(&cfg);
     return;
   }
  
   /* get the infos */
   if (!config_lookup_string(&cfg, "server", &server)) {
-    printf("\nNo 'filename' setting in configuration file.");
+    printf("No 'server' setting in configuration file.\n");
+    exit(EXIT_FAILURE);
   }
-  printf("connect to %s", server);
+  printf("config server:\t%s\n", server);
+
+  if (!config_lookup_string(&cfg, "port", &port)) {
+    printf("No 'port' setting in configuration file.\n");
+    exit(EXIT_FAILURE);
+  }
+  printf("config port:\t%s\n", port);
+
+  if (!config_lookup_string(&cfg, "channel", &channel)) {
+    printf("No 'channel' setting in configuration file.\n");
+    exit(EXIT_FAILURE);
+  }
+  printf("config channel:\t%s\n", channel);
+
+    if (!config_lookup_string(&cfg, "name", &name)) {
+    printf("No 'name' setting in configuration file.\n");
+    exit(EXIT_FAILURE);
+  }
+  printf("config name:\t%s\n", name);
+
+  if (!config_lookup_string(&cfg, "rl_name", &rl_name)) {
+    printf("No 'rl_name' setting in configuration file.\n");
+    exit(EXIT_FAILURE);
+  }
+  printf("config rl_name:\t%s\n", rl_name);
 
   /* clean up */
   config_destroy(&cfg);
