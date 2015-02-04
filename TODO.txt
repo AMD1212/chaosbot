@@ -65,3 +65,15 @@ Event: 353
 Event: 366
 	RPL_ENDOFNAMES
               "<channel> :End of NAMES list"
+
+
+Modules / functions:
+####################
+
+ping - a function that pings the host of the requested user
+maus - a function that conts users and announces new records of max users
+lastseen - when a user was online the last time
+changuard - a channel guard
+lica - a link catcher
+mltc - an mail client recieves mails from a mailinglist, if the subject line contains a special string it understands it as an announcement of a new meeting and sets the topic to the message
+dice - an irc dice
