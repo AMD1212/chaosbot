@@ -9,8 +9,8 @@
 #include "config.h"
 
 /* argparse options */
-const char *argp_program_version = "chaosbot 0.02";
-const char *argp_program_bug_address = "<somemail@somehost.tld>";
+const char *argp_program_version = VERSION;
+const char *argp_program_bug_address = PACKAGE_BUGREPORT;
 static char doc[] = "chaosbot - A lightweight irc bot";
 
 static struct argp argp = { 0, 0, 0, doc };
