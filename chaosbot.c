@@ -1,6 +1,7 @@
 #include <argp.h>
 #include <stdio.h>
 #include <string.h>
+#include <config.h>
 #include <libircclient.h>
 #include <libirc_rfcnumeric.h>
 
@@ -8,7 +9,7 @@
 #include "config.h"
 
 /* argparse options */
-const char *argp_program_version = "chaosbot 0.01";
+const char *argp_program_version = "chaosbot 0.02";
 const char *argp_program_bug_address = "<somemail@somehost.tld>";
 static char doc[] = "chaosbot - A lightweight irc bot";
 
