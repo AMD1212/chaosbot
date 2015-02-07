@@ -85,7 +85,7 @@ subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(srcdir)/config.h.in depcomp $(dist_doc_DATA) COPYING INSTALL \
-	README compile install-sh missing
+	compile install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -238,7 +238,7 @@ PACKAGE_BUGREPORT = bugs@onders.org
 PACKAGE_NAME = chaosbot
 PACKAGE_STRING = chaosbot 0.02
 PACKAGE_TARNAME = chaosbot
-PACKAGE_URL = 
+PACKAGE_URL = https://github.com/finga/chaosbot
 PACKAGE_VERSION = 0.02
 PATH_SEPARATOR = :
 SET_MAKE = 
@@ -288,7 +288,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 chaosbot_SOURCES = chaosbot.c
-dist_doc_DATA = README
+dist_doc_DATA = README.md
 AM_LDFLAGS = -L. -lircclient
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
