@@ -31,7 +31,7 @@ all: chaosbot
 chaosbot: chaosbot.o
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) chaosbot.o
 
-chaosbot.o: chaosbot.c
+chaosbot.o: chaosbot.c chaosbot.h
 	$(CC) -c -o $@ chaosbot.c $(CFLAGS)
 
 install:

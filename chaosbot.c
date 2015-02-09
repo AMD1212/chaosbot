@@ -1,16 +1,10 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <libircclient.h>
 #include <libirc_rfcnumeric.h>
 
-// Declares
-static int chaosbot_connect(void);
-static void event_connect(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
-static void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count);
-static void event_join(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
-static void event_channel(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
-static void event_privmsg(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
-
+#include "chaosbot.h"
 
 int main(void) 
 {
@@ -39,16 +33,15 @@ static int chaosbot_connect() {
 	// Now create the session
 	irc_session_t * session = irc_create_session( &callbacks );
 
-	if ( !session ) {
-	    // Handle the error
-		printf("Error handling session\n");
-		return 1337;
+	if (!session) {
+		pr_err("Unable to create IRC session!\n");
+		return EXIT_FAILURE;
 	} else {
 		printf("Session created\n");
 	}
 
 	// Connect to a regular IRC server
-	if ( irc_connect (session, "irc.freenode.net", 6667, 0, "ChaosBot-1337-", "ChaosBot-1337-", "1337 Bot in C" ) ) {
+	if (irc_connect(session, DEFAULT_IRC_SERVER, DEFAULT_IRC_PORT, NULL, DEFAULT_IRC_NICK, DEFAULT_IRC_USER, DEFAULT_IRC_REALNAME)) {
 	  // Handle the error: irc_strerror() and irc_errno()
 	}
 
@@ -72,7 +65,7 @@ static void event_numeric(irc_session_t * session, unsigned int event, const cha
 	if (event == 376) {
 			if (irc_cmd_join( session, "#metaldrachenarmee", 0) ) {
 	 			 // most likely connection error
-				printf("Error joining channel\n");
+				pr_err("Unable to join channel!\n");
 			}
 	}
 }
