@@ -1,6 +1,13 @@
 #ifndef __CHAOSBOT_H
 #define __CHAOSBOT_H
 
+/* Default parameters */
+#define DEFAULT_IRC_SERVER "irc.freenode.net"
+#define DEFAULT_IRC_PORT 6667
+#define DEFAULT_IRC_NICK "ChaosBot-1337-"
+#define DEFAULT_IRC_USER "ChaosBot-1337-"
+#define DEFAULT_IRC_REALNAME "1337 Bot in C"
+
 /* Prototpyes */
 static int chaosbot_connect(void);
 

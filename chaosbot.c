@@ -41,7 +41,7 @@ static int chaosbot_connect() {
 	}
 
 	// Connect to a regular IRC server
-	if ( irc_connect (session, "irc.freenode.net", 6667, 0, "ChaosBot-1337-", "ChaosBot-1337-", "1337 Bot in C" ) ) {
+	if (irc_connect(session, DEFAULT_IRC_SERVER, DEFAULT_IRC_PORT, NULL, DEFAULT_IRC_NICK, DEFAULT_IRC_USER, DEFAULT_IRC_REALNAME)) {
 	  // Handle the error: irc_strerror() and irc_errno()
 	}
 
