@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <libircclient.h>
 #include <libirc_rfcnumeric.h>
 
@@ -32,10 +33,9 @@ static int chaosbot_connect() {
 	// Now create the session
 	irc_session_t * session = irc_create_session( &callbacks );
 
-	if ( !session ) {
-	    // Handle the error
-		printf("Error handling session\n");
-		return 1337;
+	if (!session) {
+		pr_err("Unable to create IRC session!\n");
+		return EXIT_FAILURE;
 	} else {
 		printf("Session created\n");
 	}
@@ -65,7 +65,7 @@ static void event_numeric(irc_session_t * session, unsigned int event, const cha
 	if (event == 376) {
 			if (irc_cmd_join( session, "#metaldrachenarmee", 0) ) {
 	 			 // most likely connection error
-				printf("Error joining channel\n");
+				pr_err("Unable to join channel!\n");
 			}
 	}
 }

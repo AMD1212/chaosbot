@@ -8,6 +8,10 @@
 #define DEFAULT_IRC_USER "ChaosBot-1337-"
 #define DEFAULT_IRC_REALNAME "1337 Bot in C"
 
+/* Printing macros */
+#define pr_err(fmt, args...)   fprintf(stderr, "ERROR: " fmt, ## args)
+#define pr_warn(fmt, args...)  fprintf(stderr, "WARNING: " fmt, ## args)
+
 /* Prototpyes */
 static int chaosbot_connect(void);
 
