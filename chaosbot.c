@@ -10,7 +10,7 @@
 /* argparse options */
 const char *argp_program_version = VERSION;
 const char *argp_program_bug_address = PACKAGE_BUGREPORT;
-static char doc[] = "chaosbot - A lightweight irc bot";
+static char doc[] = "chaosbot - a lightweight irc bot";
 
 static struct argp argp = { 0, 0, 0, doc };
 
@@ -60,7 +60,7 @@ static int chaosbot_connect() {
 	}
 
 	// Connect to a regular IRC server
-	if ( irc_connect (session, "irc.freenode.net", 6667, 0, "mr_muh", "mr_muh_", "mr_cow" ) ) {
+	if ( irc_connect (session, SERVER, PORT, 0, NAME, RES_NAME, REAL_NAME ) ) {
 	  // Handle the error: irc_strerror() and irc_errno()
 	}
 
@@ -82,7 +82,7 @@ static void event_connect(irc_session_t * session, const char * event, const cha
 static void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count) {
 	printf("Numeric: At the moment i do nothing - Event: %u Origin: %s Count: %u\n", event, origin, count);
 	if (event == 376) {
-			if (irc_cmd_join( session, "#onders.org", 0) ) {
+			if (irc_cmd_join( session, CHANNEL, 0) ) {
 	 			 // most likely connection error
 				printf("Error joining channel\n");
 			}
