@@ -1,7 +1,6 @@
 #include <argp.h>
 #include <stdio.h>
 #include <string.h>
-#include <config.h>
 #include <libircclient.h>
 #include <libirc_rfcnumeric.h>
 
@@ -15,7 +14,7 @@ static char doc[] = "chaosbot - A lightweight irc bot";
 
 static struct argp argp = { 0, 0, 0, doc };
 
-// Declares
+/* declares */
 static int chaosbot_connect(void);
 static void event_connect(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
 static void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count);
