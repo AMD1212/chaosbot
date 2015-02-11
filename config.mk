@@ -1,4 +1,4 @@
-# dmenu version
+# chaosbot version
 VERSION = 0.02
 
 # paths
@@ -8,7 +8,6 @@ MANPREFIX = ${PREFIX}/share/man
 # includes and libs
 INCS = -I. -I/usr/include
 LIBS = -L/usr/lib -lc -lircclient
-#LIBS = -lircclient
 
 # flags
 CPPFLAGS = -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\"
