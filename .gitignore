@@ -21,6 +21,7 @@
 *.dylib
 
 # Executables
+chaosbot
 *.exe
 *.out
 *.app
