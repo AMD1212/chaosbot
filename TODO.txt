@@ -71,7 +71,8 @@ Modules / functions:
 ####################
 
 ping - a function that pings the host of the requested user
-maus - a function that conts users and announces new records of max users
+maus - max users, a function that counts users and announces new records of max users
+mare - max reconnects, a function that counts user connects
 lastseen - when a user was online the last time
 changuard - a channel guard
 lica - a link catcher
